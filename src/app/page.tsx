@@ -4,11 +4,6 @@ import Link from "next/link";
 
 export const dynamic = "force-static";
 
-async function getAllPosts() {
-  const { posts } = await adminDB.query({ posts: {} });
-  return posts;
-}
-
 export default async function Home() {
   const { posts } = await adminDB.query({ posts: {} });
   const orderedPosts = posts.toSorted((a, b) => b.number - a.number);
