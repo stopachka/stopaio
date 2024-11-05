@@ -47,7 +47,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
   if (!post) {
     redirect("/404");
   }
-  const html = toHTML(post.body[0].markdown);
+  const html = toHTML(post.body!.markdown);
   return (
     <div>
       <header className="mb-2 flex justify-between items-center">
