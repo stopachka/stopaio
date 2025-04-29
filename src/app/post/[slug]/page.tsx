@@ -10,7 +10,7 @@ export const dynamicParams = true;
 export async function generateStaticParams() {
   const { posts } = await adminDB.query({ posts: {} });
   return posts.map((post) => ({
-    slug: post.number.toString(),
+    slug: post.number,
   }));
 }
 
@@ -28,7 +28,7 @@ export async function generateMetadata({
     posts: [post],
   } = await adminDB.query({
     posts: {
-      $: { where: { number: +params.slug }, },
+      $: { where: { number: +params.slug } },
     },
   });
   return {
@@ -62,7 +62,9 @@ export default async function Post({ params }: { params: { slug: string } }) {
             Twitter
           </Link>
         </div>
-        <div><ActiveCounter /></div>
+        <div>
+          <ActiveCounter />
+        </div>
       </header>
       <div className="prose prose-h1:mt-8 prose-h1:mb-4 prose-h2:mt-4 prose-h2:mb-2 mx-auto">
         <h1>{post.title}</h1>

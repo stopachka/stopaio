@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import clientDB from "@/lib/instantClient";
 import { tx } from "@instantdb/admin";
@@ -10,12 +10,12 @@ const useIsHydrated = () => {
     setIsHydrated(true);
   }, []);
   return isHydrated;
-}
+};
 
 async function bustNext(refresh_token: string) {
-  return fetch('/api/bust', {
-    method: 'POST',
-    headers: { 'Token': refresh_token }
+  return fetch("/api/bust", {
+    method: "POST",
+    headers: { Token: refresh_token },
   });
 }
 
@@ -23,14 +23,15 @@ function PostEditor({ id }: { id: string }) {
   const { user } = clientDB.useAuth();
   const { isLoading, error, data } = clientDB.useQuery({
     posts: {
-      $: { where: { id } }, body: {}
-    }
+      $: { where: { id } },
+      body: {},
+    },
   });
-  if (isLoading) return <div>...</div>
-  if (error) return <div>{error.message}</div>
+  if (isLoading) return <div>...</div>;
+  if (error) return <div>{error.message}</div>;
   const post = data.posts[0];
-  if (!post) return <div>Post not found</div>
-  const postBody = post.body[0];
+  if (!post) return <div>Post not found</div>;
+  const postBody = post.body!;
   return (
     <form
       key={post.id}
@@ -42,8 +43,8 @@ function PostEditor({ id }: { id: string }) {
         const markdown = target.markdown.value;
         await clientDB.transact([
           tx.posts[post.id].update({ title }),
-          tx.postBodies[postBody.id].update({ markdown })
-        ])
+          tx.postBodies[postBody.id].update({ markdown }),
+        ]);
         const res = await bustNext(user!.refresh_token);
         alert(`🫡 ${res.status}`);
       }}
@@ -56,50 +57,49 @@ function PostEditor({ id }: { id: string }) {
       <textarea
         name="markdown"
         className="block w-full p-2 h-96 border"
-        defaultValue={postBody.markdown} />
-      <button
-        className="block bg-blue-100 w-full p-2 bold"
-      >
-        Save
-      </button>
+        defaultValue={postBody.markdown}
+      />
+      <button className="block bg-blue-100 w-full p-2 bold">Save</button>
     </form>
-  )
+  );
 }
 
 function Editor() {
   const { isLoading, error, data } = clientDB.useQuery({ posts: {} });
   const [activePostId, setActivePostId] = useState<string | null>(null);
-  if (isLoading) return <div>...</div>
-  if (error) return <div>{error.message}</div>
+  if (isLoading) return <div>...</div>;
+  if (error) return <div>{error.message}</div>;
   return (
     <div className="flex font-sans">
       <div className="max-w-xs flex flex-col space-y-1 border-r">
-        {
-          data.posts.toSorted(
-            (a, b) => b.number - a.number).map((post) => {
-              return (
-                <button
-                  key={post.id}
-                  className={
-                    `text-left hover:bg-gray-100 block p-2 
-                    ${activePostId === post.id ? 'bg-gray-100' : ''}`
-                  }
-                  onClick={() => setActivePostId(post.id)}>
-                  {post.title}
-                </button>
-              );
-            })
-        }
+        {data.posts
+          .toSorted((a, b) => b.number - a.number)
+          .map((post) => {
+            return (
+              <button
+                key={post.id}
+                className={`text-left hover:bg-gray-100 block p-2 
+                    ${activePostId === post.id ? "bg-gray-100" : ""}`}
+                onClick={() => setActivePostId(post.id)}
+              >
+                {post.title}
+              </button>
+            );
+          })}
       </div>
       <div className="flex-1 px-4 max-w-lg">
-        {activePostId ? <PostEditor id={activePostId} /> : <div className="text-gray-600 italic">Pick a post to edit it :)</div>}
+        {activePostId ? (
+          <PostEditor id={activePostId} />
+        ) : (
+          <div className="text-gray-600 italic">Pick a post to edit it :)</div>
+        )}
       </div>
     </div>
-  )
+  );
 }
 
 function Login() {
-  const [sentEmail, setSentEmail] = useState('');
+  const [sentEmail, setSentEmail] = useState("");
   return (
     <div>
       {!sentEmail ? (
@@ -123,8 +123,8 @@ function Email({ setSentEmail }: { setSentEmail: Function }) {
     if (!email) return;
     setSentEmail(email);
     clientDB.auth.sendMagicCode({ email }).catch((err: any) => {
-      alert('Uh oh: ' + err.body?.message);
-      setSentEmail('');
+      alert("Uh oh: " + err.body?.message);
+      setSentEmail("");
     });
   };
 
@@ -154,9 +154,11 @@ function MagicCode({ sentEmail }: { sentEmail: string }) {
     e.preventDefault();
     const code = codeRef.current?.value;
     if (!code) return;
-    clientDB.auth.signInWithMagicCode({ email: sentEmail, code }).catch((err: any) => {
-      alert('Uh oh: ' + err.body?.message);
-    });
+    clientDB.auth
+      .signInWithMagicCode({ email: sentEmail, code })
+      .catch((err: any) => {
+        alert("Uh oh: " + err.body?.message);
+      });
   };
 
   return (

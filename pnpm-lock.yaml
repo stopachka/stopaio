@@ -9,11 +9,14 @@ importers:
   .:
     dependencies:
       '@instantdb/admin':
-        specifier: ^0.14.26
-        version: 0.14.26
+        specifier: 0.18.9
+        version: 0.18.9
+      '@instantdb/core':
+        specifier: 0.18.9
+        version: 0.18.9
       '@instantdb/react':
-        specifier: ^0.14.26
-        version: 0.14.26(react@18.3.1)
+        specifier: 0.18.9
+        version: 0.18.9(react@18.3.1)
       feed:
         specifier: ^4.2.2
         version: 4.2.2
@@ -70,14 +73,14 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  '@instantdb/admin@0.14.26':
-    resolution: {integrity: sha512-6sqFLB/lr6AI0dl9tdpxwc5DqAj4v80XZF/CtpplgKlF/Kik/fLW93lKeTYqeG69a+eJkwnoBC0+0Q6vpUgwbg==}
+  '@instantdb/admin@0.18.9':
+    resolution: {integrity: sha512-uwWlPt3vAgBQ9b7HXDRLgE2a5JBDr8KR4KYMmPrzpRRDslJakIme4TRYcDWjaEqFEfgNI4KR56fMktI/XyQw6A==}
 
-  '@instantdb/core@0.14.26':
-    resolution: {integrity: sha512-sLLeJVwPJLSgvn1HefIEMJvjUoZoEPNeuuexquU8qyM6SnDqeLhido5nuA97jN1qjQHBK//dBER0ypC1bwZTww==}
+  '@instantdb/core@0.18.9':
+    resolution: {integrity: sha512-jxBk0J+fomqcNBBEm62M8K+1qqUrEH7gouumZkEmm+W8C1PfRiHrfdmxSPwuQo2dbgkBOcuQ0rk/M+3xD9pGOw==}
 
-  '@instantdb/react@0.14.26':
-    resolution: {integrity: sha512-8knXtrs5psdQnGfD9IjC22IjOaVNB6jKR43TlEtfnJu7j2ZS2fv9qE4+glbRzO9I0Z5WT8PH0EVioUVMzLUY7Q==}
+  '@instantdb/react@0.18.9':
+    resolution: {integrity: sha512-W8IDxNVs737U6m1oAwJT8e/aScdMaXFrMbNfcHOzZy33ZdbkIO5vx7DobpmXFKXQZSZGeZxU8MWg/Djrw+E6pQ==}
     peerDependencies:
       react: '>=16'
 
@@ -755,18 +758,18 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
-  '@instantdb/admin@0.14.26':
+  '@instantdb/admin@0.18.9':
     dependencies:
-      '@instantdb/core': 0.14.26
+      '@instantdb/core': 0.18.9
 
-  '@instantdb/core@0.14.26':
+  '@instantdb/core@0.18.9':
     dependencies:
       mutative: 1.0.11
       uuid: 9.0.1
 
-  '@instantdb/react@0.14.26(react@18.3.1)':
+  '@instantdb/react@0.18.9(react@18.3.1)':
     dependencies:
-      '@instantdb/core': 0.14.26
+      '@instantdb/core': 0.18.9
       react: 18.3.1
 
   '@isaacs/cliui@8.0.2':
