@@ -1,7 +1,7 @@
 import { i } from "@instantdb/react";
 
-const graph = i.graph(
-  {
+const schema = i.schema({
+  entities: {
     $users: i.entity({
       email: i.string().unique().indexed(),
     }),
@@ -15,12 +15,15 @@ const graph = i.graph(
       updatedAt: i.number(),
     }),
   },
-  {
+  links: {
     postsBody: {
       forward: { on: "posts", has: "one", label: "body" },
       reverse: { on: "postBodies", has: "one", label: "post" },
     },
-  }
-);
+  },
+  rooms: {
+    pages: { presence: i.entity({}) },
+  },
+});
 
-export default graph;
+export default schema;

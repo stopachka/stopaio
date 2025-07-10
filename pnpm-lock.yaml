@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@instantdb/admin':
-        specifier: ^0.14.26
-        version: 0.14.26
+        specifier: ^0.20.6
+        version: 0.20.6
       '@instantdb/react':
-        specifier: ^0.14.26
-        version: 0.14.26(react@18.3.1)
+        specifier: ^0.20.6
+        version: 0.20.6(react@18.3.1)
       feed:
         specifier: ^4.2.2
         version: 4.2.2
@@ -70,14 +70,14 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  '@instantdb/admin@0.14.26':
-    resolution: {integrity: sha512-6sqFLB/lr6AI0dl9tdpxwc5DqAj4v80XZF/CtpplgKlF/Kik/fLW93lKeTYqeG69a+eJkwnoBC0+0Q6vpUgwbg==}
+  '@instantdb/admin@0.20.6':
+    resolution: {integrity: sha512-jnI+WjRurbb8rucqtwZCgh9xLa7KQcqE1voB6O3durr8hSh/YdeqlUKl3Egf/EwZCJWvy6Hi6e4AIf1/YlPL9g==}
 
-  '@instantdb/core@0.14.26':
-    resolution: {integrity: sha512-sLLeJVwPJLSgvn1HefIEMJvjUoZoEPNeuuexquU8qyM6SnDqeLhido5nuA97jN1qjQHBK//dBER0ypC1bwZTww==}
+  '@instantdb/core@0.20.6':
+    resolution: {integrity: sha512-G8RBuZUyTOnqlWa8vToZ5e8Pf63cO9YHBre25eDDi8wGs0LudDGEK//Nl79b1E+wprXAZlQ9O3i5dtGAYQQq8g==}
 
-  '@instantdb/react@0.14.26':
-    resolution: {integrity: sha512-8knXtrs5psdQnGfD9IjC22IjOaVNB6jKR43TlEtfnJu7j2ZS2fv9qE4+glbRzO9I0Z5WT8PH0EVioUVMzLUY7Q==}
+  '@instantdb/react@0.20.6':
+    resolution: {integrity: sha512-6Q+1VXsKm6haQOVFiBs4MmHfPiZF+SogeIklGMGt8gl+PhNmGlZvBxh0TVHr5hwOZ3HMNRQtWdnhUYyj4210LA==}
     peerDependencies:
       react: '>=16'
 
@@ -725,8 +725,8 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  uuid@9.0.1:
-    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+  uuid@11.1.0:
+    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
 
   which@2.0.2:
@@ -755,18 +755,18 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
-  '@instantdb/admin@0.14.26':
+  '@instantdb/admin@0.20.6':
     dependencies:
-      '@instantdb/core': 0.14.26
+      '@instantdb/core': 0.20.6
 
-  '@instantdb/core@0.14.26':
+  '@instantdb/core@0.20.6':
     dependencies:
       mutative: 1.0.11
-      uuid: 9.0.1
+      uuid: 11.1.0
 
-  '@instantdb/react@0.14.26(react@18.3.1)':
+  '@instantdb/react@0.20.6(react@18.3.1)':
     dependencies:
-      '@instantdb/core': 0.14.26
+      '@instantdb/core': 0.20.6
       react: 18.3.1
 
   '@isaacs/cliui@8.0.2':
@@ -1350,7 +1350,7 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  uuid@9.0.1: {}
+  uuid@11.1.0: {}
 
   which@2.0.2:
     dependencies:
