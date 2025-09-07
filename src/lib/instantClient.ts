@@ -1,9 +1,9 @@
-import { init_experimental } from "@instantdb/react";
-import graph from "../../instant.schema";
+import { init } from "@instantdb/react";
+import schema from "@/instant.schema";
 
-const clientDB = init_experimental({
+const clientDB = init({
   appId: process.env.NEXT_PUBLIC_INSTANT_APP_ID!,
-  schema: graph.withRoomSchema<{ pages: { presence: {} } }>(),
+  schema: schema,
 });
 
 export default clientDB;
