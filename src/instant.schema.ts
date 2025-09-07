@@ -1,3 +1,5 @@
+// Docs: https://www.instantdb.com/docs/modeling-data
+
 import { i } from "@instantdb/react";
 
 const _schema = i.schema({
@@ -15,7 +17,7 @@ const _schema = i.schema({
     posts: i.entity({
       createdAt: i.number(),
       isDraft: i.boolean().optional(),
-      number: i.number(),
+      number: i.number().unique().indexed(),
       title: i.string(),
       updatedAt: i.number(),
     }),
