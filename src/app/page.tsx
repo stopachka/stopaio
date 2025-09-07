@@ -1,8 +1,21 @@
 import ActiveCounter from "@/app/ActiveCounter";
 import adminDB from "@/lib/instantAdmin";
+import { Metadata } from "next";
 import Link from "next/link";
 
 export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+  title: "Stepan Parunashvili",
+  description: "Read Essays by Stepan Parunashvili",
+  alternates: {
+    canonical: "https://stopa.io",
+    types: {
+      "application/rss+xml": "https://stopa.io/feed.rss",
+      "application/atom+xml": "https://stopa.io/feed.atom",
+    },
+  },
+};
 
 export default async function Home() {
   const { posts } = await adminDB.query({ posts: {} });
