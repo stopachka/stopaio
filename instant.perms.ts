@@ -1,12 +1,13 @@
 const rules = {
-  attrs: {
+  $default: {
     allow: {
-      create: "false",
+      default: "false",
     },
   },
   posts: {
     bind: ["isAdmin", "auth.email == 'stepan.p@gmail.com'"],
     allow: {
+      view: "true",
       create: "isAdmin",
       delete: "isAdmin",
       update: "isAdmin",
@@ -15,6 +16,7 @@ const rules = {
   postBodies: {
     bind: ["isAdmin", "auth.email == 'stepan.p@gmail.com'"],
     allow: {
+      view: "true",
       create: "isAdmin",
       delete: "isAdmin",
       update: "isAdmin",

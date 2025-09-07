@@ -1,7 +1,7 @@
 "use client";
 
 import clientDB from "@/lib/instantClient";
-import { tx } from "@instantdb/admin";
+import { tx, id } from "@instantdb/admin";
 import { useEffect, useRef, useState } from "react";
 
 const useIsHydrated = () => {
@@ -27,6 +27,7 @@ function PostEditor({ id }: { id: string }) {
       body: {},
     },
   });
+  
   if (isLoading) return <div>...</div>;
   if (error) return <div>{error.message}</div>;
   const post = data.posts[0];
@@ -41,8 +42,9 @@ function PostEditor({ id }: { id: string }) {
         const target = e.target as any;
         const title = target.title.value;
         const markdown = target.markdown.value;
+        const isDraft = target.isDraft.checked;
         await clientDB.transact([
-          tx.posts[post.id].update({ title }),
+          tx.posts[post.id].update({ title, isDraft }),
           tx.postBodies[postBody.id].update({ markdown }),
         ]);
         const res = await bustNext(user!.refresh_token);
@@ -59,7 +61,73 @@ function PostEditor({ id }: { id: string }) {
         className="block w-full p-2 h-96 border"
         defaultValue={postBody.markdown}
       />
+      <label className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          name="isDraft"
+          defaultChecked={post.isDraft || false}
+        />
+        <span>Draft</span>
+      </label>
       <button className="block bg-blue-100 w-full p-2 bold">Save</button>
+    </form>
+  );
+}
+
+function CreatePost() {
+  const { user } = clientDB.useAuth();
+  const [isDraft, setIsDraft] = useState(true);
+  const [title, setTitle] = useState("");
+  const [markdown, setMarkdown] = useState("");
+  
+  return (
+    <form
+      className="space-y-2"
+      onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const postId = id();
+        const bodyId = id();
+        const nextNumber = Math.floor(Date.now() / 1000);
+        await clientDB.transact([
+          tx.posts[postId].update({ 
+            title, 
+            number: nextNumber,
+            isDraft 
+          }),
+          tx.postBodies[bodyId].update({ markdown }),
+          tx.posts[postId].link({ body: bodyId }),
+        ]);
+        const res = await bustNext(user!.refresh_token);
+        alert(`🫡 ${res.status}`);
+        setTitle("");
+        setMarkdown("");
+        setIsDraft(true);
+      }}
+    >
+      <h2 className="font-bold">Create New Post</h2>
+      <input
+        name="title"
+        className="block w-full p-2 border"
+        placeholder="Enter title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <textarea
+        name="markdown"
+        className="block w-full p-2 h-96 border"
+        placeholder="Write your post content here..."
+        value={markdown}
+        onChange={(e) => setMarkdown(e.target.value)}
+      />
+      <label className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          checked={isDraft}
+          onChange={(e) => setIsDraft(e.target.checked)}
+        />
+        <span>Draft</span>
+      </label>
+      <button className="block bg-blue-100 w-full p-2 bold">Create Post</button>
     </form>
   );
 }
@@ -67,11 +135,23 @@ function PostEditor({ id }: { id: string }) {
 function Editor() {
   const { isLoading, error, data } = clientDB.useQuery({ posts: {} });
   const [activePostId, setActivePostId] = useState<string | null>(null);
+  const [showCreate, setShowCreate] = useState(false);
   if (isLoading) return <div>...</div>;
   if (error) return <div>{error.message}</div>;
   return (
     <div className="flex font-sans">
       <div className="max-w-xs flex flex-col space-y-1 border-r">
+        <button
+          className={`text-left hover:bg-gray-100 block p-2 font-bold
+              ${showCreate ? "bg-gray-100" : ""}`}
+          onClick={() => {
+            setShowCreate(true);
+            setActivePostId(null);
+          }}
+        >
+          + Create New Post
+        </button>
+        <div className="border-b" />
         {data.posts
           .toSorted((a, b) => b.number - a.number)
           .map((post) => {
@@ -80,15 +160,21 @@ function Editor() {
                 key={post.id}
                 className={`text-left hover:bg-gray-100 block p-2 
                     ${activePostId === post.id ? "bg-gray-100" : ""}`}
-                onClick={() => setActivePostId(post.id)}
+                onClick={() => {
+                  setActivePostId(post.id);
+                  setShowCreate(false);
+                }}
               >
                 {post.title}
+                {post.isDraft && <span className="text-gray-500 text-sm ml-2">(Draft)</span>}
               </button>
             );
           })}
       </div>
       <div className="flex-1 px-4 max-w-lg">
-        {activePostId ? (
+        {showCreate ? (
+          <CreatePost />
+        ) : activePostId ? (
           <PostEditor id={activePostId} />
         ) : (
           <div className="text-gray-600 italic">Pick a post to edit it :)</div>
