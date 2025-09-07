@@ -6,9 +6,10 @@ export const dynamic = "force-static";
 
 export default async function Home() {
   const { posts } = await adminDB.query({ posts: {} });
+  const isLocalDev = process.env.NODE_ENV === "development";
   const orderedPosts = posts
     .toSorted((a, b) => b.number - a.number)
-    .filter((p) => !p.isDraft);
+    .filter((p) => isLocalDev || !p.isDraft);
   return (
     <div>
       <header className="mb-2 flex justify-between items-center">
@@ -76,6 +77,9 @@ export default async function Home() {
                   <Link href={`/post/${post.number}`} className="underline">
                     {post.title}
                   </Link>
+                  {post.isDraft && (
+                    <span className="text-gray-500 text-sm ml-2">(Draft)</span>
+                  )}
                 </div>
               );
             })}
