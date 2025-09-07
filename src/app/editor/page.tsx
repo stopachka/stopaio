@@ -27,7 +27,7 @@ function PostEditor({ id }: { id: string }) {
       body: {},
     },
   });
-  
+
   if (isLoading) return <div>...</div>;
   if (error) return <div>{error.message}</div>;
   const post = data.posts[0];
@@ -79,7 +79,7 @@ function CreatePost({ nextNumber }: { nextNumber: number }) {
   const [isDraft, setIsDraft] = useState(true);
   const [title, setTitle] = useState("");
   const [markdown, setMarkdown] = useState("");
-  
+
   return (
     <form
       className="space-y-2"
@@ -89,12 +89,12 @@ function CreatePost({ nextNumber }: { nextNumber: number }) {
         const bodyId = id();
         const now = Date.now();
         await clientDB.transact([
-          tx.posts[postId].create({ 
-            title, 
+          tx.posts[postId].create({
+            title,
             number: nextNumber,
             isDraft,
             createdAt: now,
-            updatedAt: now
+            updatedAt: now,
           }),
           tx.postBodies[bodyId].create({ markdown }),
           tx.posts[postId].link({ body: bodyId }),
@@ -140,11 +140,13 @@ function Editor() {
   const [showCreate, setShowCreate] = useState(false);
   if (isLoading) return <div>...</div>;
   if (error) return <div>{error.message}</div>;
-  
-  const maxNumber = data.posts.reduce((max, post) => 
-    Math.max(max, post.number || 0), 0);
+
+  const maxNumber = data.posts.reduce(
+    (max, post) => Math.max(max, post.number),
+    0
+  );
   const nextNumber = maxNumber + 1;
-  
+
   return (
     <div className="flex font-sans">
       <div className="max-w-xs flex flex-col space-y-1 border-r">
@@ -173,7 +175,9 @@ function Editor() {
                 }}
               >
                 {post.title}
-                {post.isDraft && <span className="text-gray-500 text-sm ml-2">(Draft)</span>}
+                {post.isDraft && (
+                  <span className="text-gray-500 text-sm ml-2">(Draft)</span>
+                )}
               </button>
             );
           })}
