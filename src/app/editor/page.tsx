@@ -74,7 +74,7 @@ function PostEditor({ id }: { id: string }) {
   );
 }
 
-function CreatePost() {
+function CreatePost({ nextNumber }: { nextNumber: number }) {
   const { user } = clientDB.useAuth();
   const [isDraft, setIsDraft] = useState(true);
   const [title, setTitle] = useState("");
@@ -87,14 +87,16 @@ function CreatePost() {
         e.preventDefault();
         const postId = id();
         const bodyId = id();
-        const nextNumber = Math.floor(Date.now() / 1000);
+        const now = Date.now();
         await clientDB.transact([
-          tx.posts[postId].update({ 
+          tx.posts[postId].create({ 
             title, 
             number: nextNumber,
-            isDraft 
+            isDraft,
+            createdAt: now,
+            updatedAt: now
           }),
-          tx.postBodies[bodyId].update({ markdown }),
+          tx.postBodies[bodyId].create({ markdown }),
           tx.posts[postId].link({ body: bodyId }),
         ]);
         const res = await bustNext(user!.refresh_token);
@@ -138,6 +140,11 @@ function Editor() {
   const [showCreate, setShowCreate] = useState(false);
   if (isLoading) return <div>...</div>;
   if (error) return <div>{error.message}</div>;
+  
+  const maxNumber = data.posts.reduce((max, post) => 
+    Math.max(max, post.number || 0), 0);
+  const nextNumber = maxNumber + 1;
+  
   return (
     <div className="flex font-sans">
       <div className="max-w-xs flex flex-col space-y-1 border-r">
@@ -173,7 +180,7 @@ function Editor() {
       </div>
       <div className="flex-1 px-4 max-w-lg">
         {showCreate ? (
-          <CreatePost />
+          <CreatePost nextNumber={nextNumber} />
         ) : activePostId ? (
           <PostEditor id={activePostId} />
         ) : (
