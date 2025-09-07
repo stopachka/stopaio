@@ -13,6 +13,7 @@ const graph = i.graph(
       number: i.number(),
       title: i.string(),
       updatedAt: i.number(),
+      isDraft: i.boolean().optional(),
     }),
   },
   {

@@ -6,7 +6,9 @@ export const dynamic = "force-static";
 
 export default async function Home() {
   const { posts } = await adminDB.query({ posts: {} });
-  const orderedPosts = posts.toSorted((a, b) => b.number - a.number);
+  const orderedPosts = posts
+    .toSorted((a, b) => b.number - a.number)
+    .filter((p) => !p.isDraft);
   return (
     <div>
       <header className="mb-2 flex justify-between items-center">
@@ -15,17 +17,16 @@ export default async function Home() {
             Stepan Parunashvili
           </Link>
         </div>
-        <div><ActiveCounter /></div>
+        <div>
+          <ActiveCounter />
+        </div>
       </header>
       <div className="space-y-4">
         <div className="space-y-1">
           <h2 className="text-gray-500">My startup</h2>
           <p>
             <span>
-              <Link
-                href="https://instantdb.com"
-                target="_blank"
-              >
+              <Link href="https://instantdb.com" target="_blank">
                 Instant
               </Link>
               : Build real-time and offline apps
