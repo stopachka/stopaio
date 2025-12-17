@@ -11,6 +11,9 @@ importers:
       '@instantdb/admin':
         specifier: 0.22.90-experimental.drewh-ssr.20286580593.1
         version: 0.22.90-experimental.drewh-ssr.20286580593.1
+      '@instantdb/core':
+        specifier: 0.22.90-experimental.drewh-ssr.20286580593.1
+        version: 0.22.90-experimental.drewh-ssr.20286580593.1
       '@instantdb/react':
         specifier: 0.22.90-experimental.drewh-ssr.20286580593.1
         version: 0.22.90-experimental.drewh-ssr.20286580593.1(react@18.3.1)
