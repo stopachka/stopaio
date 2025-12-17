@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@instantdb/admin':
-        specifier: ^0.21.13
-        version: 0.21.13
+        specifier: 0.22.90-experimental.drewh-ssr.20286580593.1
+        version: 0.22.90-experimental.drewh-ssr.20286580593.1
       '@instantdb/react':
-        specifier: ^0.21.13
-        version: 0.21.13(react@18.3.1)
+        specifier: 0.22.90-experimental.drewh-ssr.20286580593.1
+        version: 0.22.90-experimental.drewh-ssr.20286580593.1(react@18.3.1)
       feed:
         specifier: ^4.2.2
         version: 4.2.2
@@ -70,19 +70,24 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  '@instantdb/admin@0.21.13':
-    resolution: {integrity: sha512-dlxw+uJFAephQV4fcSPoEVYREbSaw5/9dQXtxQmvcWUIEX0i/lLyil9AV+nHLfD3gcKkzjeILJbFILytholGXQ==}
+  '@instantdb/admin@0.22.90-experimental.drewh-ssr.20286580593.1':
+    resolution: {integrity: sha512-BZH7mE97pZGFAZNixHjeOD/fVniw5N+xdtPq4xQOHBMWZsq9wjvD4DPWtnnMjWWuKdVW9E5pdO7JRwFqzxKWIQ==}
 
-  '@instantdb/core@0.21.13':
-    resolution: {integrity: sha512-TtiXU4iV8ASTz+usviHupN85ZNGvMMVG4y4ADvzrwwx0Rif1aoRaKMnhffgOKXJK+bfQH6RKN/p5jODEwhVV/A==}
+  '@instantdb/core@0.22.90-experimental.drewh-ssr.20286580593.1':
+    resolution: {integrity: sha512-wVIPTaSnbG+4ydpUL2bmfqB7aRS2kBqMp6BwC0Aj64cKOzBtuFfqR/ddeYFAYhe15hY1G2gIpkPRGw+s2Yi0/A==}
 
-  '@instantdb/react@0.21.13':
-    resolution: {integrity: sha512-T76fgDm8EunvEBDAeOpxitlvWqnRKnpQFKvbMxwodSAd7sh3lc4tskqzmL46UToLUq4aAHdfEHWVnFITYeT7Jg==}
+  '@instantdb/react-common@0.22.90-experimental.drewh-ssr.20286580593.1':
+    resolution: {integrity: sha512-DpA0hHUVLd2BS3d0c42Hm5Gv4oLDY5ddiWIzxcBsR5PlQI1xM2EqvkPNQIndmExfPxy/Q082yN67fADTOXUL3w==}
     peerDependencies:
       react: '>=16'
 
-  '@instantdb/version@0.21.13':
-    resolution: {integrity: sha512-7sJzQpfipsZdlR0m8xGgjQx9toHooJ132JvkiH4bPFRKXsi5W8ACfvRPJVy8MnWq9qInR0C5JB3cHtjDruApuA==}
+  '@instantdb/react@0.22.90-experimental.drewh-ssr.20286580593.1':
+    resolution: {integrity: sha512-rS2AJ7rsr/oi4AW9NDPWyLVV+7x/H451CsbY2UBYYxE944GDZnCqKQXoLhTlJreYLvRwS7InTdjVqzSwTjL27Q==}
+    peerDependencies:
+      react: '>=16'
+
+  '@instantdb/version@0.22.90-experimental.drewh-ssr.20286580593.1':
+    resolution: {integrity: sha512-ypgCUxkPIxFLNxkSZstBYAv2Vg5EZ8AbaX/mlprwD+tE6/WsNkG27Op/4GfG+E252DK3U9n2eoqysQ/UnieBUg==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -766,25 +771,33 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
-  '@instantdb/admin@0.21.13':
+  '@instantdb/admin@0.22.90-experimental.drewh-ssr.20286580593.1':
     dependencies:
-      '@instantdb/core': 0.21.13
-      '@instantdb/version': 0.21.13
+      '@instantdb/core': 0.22.90-experimental.drewh-ssr.20286580593.1
+      '@instantdb/version': 0.22.90-experimental.drewh-ssr.20286580593.1
       eventsource: 4.0.0
 
-  '@instantdb/core@0.21.13':
+  '@instantdb/core@0.22.90-experimental.drewh-ssr.20286580593.1':
     dependencies:
-      '@instantdb/version': 0.21.13
+      '@instantdb/version': 0.22.90-experimental.drewh-ssr.20286580593.1
       mutative: 1.0.11
       uuid: 11.1.0
 
-  '@instantdb/react@0.21.13(react@18.3.1)':
+  '@instantdb/react-common@0.22.90-experimental.drewh-ssr.20286580593.1(react@18.3.1)':
     dependencies:
-      '@instantdb/core': 0.21.13
-      '@instantdb/version': 0.21.13
+      '@instantdb/core': 0.22.90-experimental.drewh-ssr.20286580593.1
+      '@instantdb/version': 0.22.90-experimental.drewh-ssr.20286580593.1
       react: 18.3.1
 
-  '@instantdb/version@0.21.13': {}
+  '@instantdb/react@0.22.90-experimental.drewh-ssr.20286580593.1(react@18.3.1)':
+    dependencies:
+      '@instantdb/core': 0.22.90-experimental.drewh-ssr.20286580593.1
+      '@instantdb/react-common': 0.22.90-experimental.drewh-ssr.20286580593.1(react@18.3.1)
+      '@instantdb/version': 0.22.90-experimental.drewh-ssr.20286580593.1
+      eventsource: 4.0.0
+      react: 18.3.1
+
+  '@instantdb/version@0.22.90-experimental.drewh-ssr.20286580593.1': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
